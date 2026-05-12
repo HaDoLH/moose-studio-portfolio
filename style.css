@@ -89,6 +89,42 @@ em{font-style:italic}
 .hero-tag-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
+/* Hero 階梯淡入 — 載入時依序滑入 */
+@keyframes heroFadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero-tag{animation:heroFadeIn .7s ease .1s both}
+.hero-title{animation:heroFadeIn .8s ease .25s both}
+.hero-sub{animation:heroFadeIn .7s ease .4s both}
+.hero-desc{animation:heroFadeIn .7s ease .55s both}
+.cta-row{animation:heroFadeIn .7s ease .7s both}
+.hero-right{animation:heroFadeIn .9s ease .35s both}
+
+/* Hero 底部 Scroll Indicator */
+.hero-scroll-hint{
+  position:absolute;bottom:28px;left:50%;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--faint);
+  text-decoration:none;
+  animation:heroFadeIn .7s ease 1s both, scrollBounce 2s ease-in-out 1.7s infinite;
+  z-index:2;
+  transition:color .2s ease;
+}
+.hero-scroll-hint:hover{color:var(--accent)}
+.hero-scroll-arrow{font-size:14px;line-height:1}
+@keyframes scrollBounce{
+  0%,100%{transform:translate(-50%,0)}
+  50%{transform:translate(-50%,6px)}
+}
+@media (max-width:720px){
+  .hero-scroll-hint{display:none}
+}
+
 .hero-title{
   font-family:'Instrument Serif',serif;
   font-size:clamp(48px,6.5vw,84px);
@@ -209,14 +245,17 @@ em{font-style:italic}
   box-shadow:0 12px 30px -15px rgba(0,0,0,.25);
   overflow:hidden;position:relative;
 }
-.peek-1{background:linear-gradient(135deg,#ffd9c4,#ff5b1f)}
-.peek-2{background:linear-gradient(135deg,#fbe6c2,#c98b3a)}
-.peek-3{background:linear-gradient(135deg,#c9d8ff,#3d56a0)}
-.peek-4{background:linear-gradient(135deg,#e7e1d2,#8a7e64)}
-.peek-5{background:linear-gradient(135deg,#1a1a1a,#5a4633)}
-.peek-6{background:linear-gradient(135deg,#d6efd8,#3f7d50)}
-.peek-7{background:linear-gradient(135deg,#fce7f3,#c2185b)}
-.peek-8{background:linear-gradient(135deg,#fff6b3,#d4a017)}
+.peek-1,.peek-2,.peek-3,.peek-4,
+.peek-5,.peek-6,.peek-7,.peek-8{
+  background:var(--bg3);
+  color:var(--faint);
+  align-items:center;
+  justify-content:center;
+  font-family:'Instrument Serif',serif;
+  font-style:italic;
+  font-size:48px;
+  padding:0;
+}
 
 /* === LIGHTBOX === */
 .lightbox{
@@ -257,8 +296,10 @@ em{font-style:italic}
 /* === SECTION 共通 === */
 .section{max-width:var(--maxw);margin:0 auto;padding:100px 48px}
 .section-eyebrow{
-  font-size:12px;color:var(--accent);
-  letter-spacing:.12em;text-transform:uppercase;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:500;
+  color:var(--accent);
+  letter-spacing:.15em;text-transform:uppercase;
   margin-bottom:16px;
 }
 .section-title{
@@ -298,14 +339,14 @@ em{font-style:italic}
   aspect-ratio:16/10;position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
 }
-.thumb-1{background:linear-gradient(135deg,#ffd9c4,#ff5b1f)}
-.thumb-2{background:linear-gradient(135deg,#e7e1d2,#8a7e64)}
-.thumb-3{background:linear-gradient(135deg,#c9d8ff,#3d56a0)}
-.thumb-4{background:linear-gradient(135deg,#d6efd8,#3f7d50)}
+.thumb-1,.thumb-2,.thumb-3,.thumb-4{
+  background:var(--bg3);
+}
 .card-watermark{
   font-family:'Instrument Serif',serif;
-  font-size:48px;font-style:italic;
-  color:rgba(255,255,255,.35);letter-spacing:.05em;
+  font-size:72px;font-style:italic;
+  color:var(--faint);letter-spacing:.02em;
+  opacity:.5;
 }
 .card-body{padding:28px}
 .meta{
@@ -499,8 +540,9 @@ em{font-style:italic}
 .about-photo:first-child{grid-column:1/3}
 .about-photo-label{
   font-family:'Instrument Serif',serif;
-  font-size:14px;font-style:italic;
-  color:rgba(255,255,255,.85);letter-spacing:.05em;
+  font-size:48px;font-style:italic;
+  color:var(--faint);letter-spacing:.02em;
+  opacity:.5;
 }
 .about-name{
   font-family:'Instrument Serif',serif;
